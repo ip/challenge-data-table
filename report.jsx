@@ -1,6 +1,5 @@
 const React = require('react')
 const ReactPivot = require('react-pivot')
-const createReactClass = require('create-react-class')
 
 const rows = require('./data.json')
 
@@ -18,20 +17,20 @@ const calculations = [
   { title: 'Displays', value: 'displays' },
   {
     title: 'Load Rate',
-    value: row => `${(row.loads / row.impressions * 100).toFixed(1)}%`,
+    value: row => `${(row.loads / row.impressions * 100).toFixed(1)}%`
   },
   {
     title: 'Display Rate',
-    value: row => `${(row.displays / row.loads * 100).toFixed(1)}%`,
+    value: row => `${(row.displays / row.loads * 100).toFixed(1)}%`
   }
 ]
 
 function reduce (row, accumulator) {
   const acc = accumulator
 
-  ;['impressions', 'loads', 'displays'].forEach(
-    type => acc[type] = acc[type] || 0
-  )
+  ;['impressions', 'loads', 'displays'].forEach(type => {
+    acc[type] = acc[type] || 0
+  })
 
   ;['impression', 'load', 'display'].forEach(type => {
     if (row.type === type) {
